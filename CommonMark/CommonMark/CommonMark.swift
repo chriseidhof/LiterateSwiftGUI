@@ -21,11 +21,26 @@ public func parseFile(filename: String) -> Node? {
     }
 }
 
-public struct Node: Printable {
+public class Node: Printable {
     let node: COpaquePointer
+    let freeWhenDone: Bool
     
     init(node: COpaquePointer) {
         self.node = node
+        freeWhenDone = false
+    }
+    
+    init(type: cmark_node_type) {
+        self.node = cmark_node_new(type)
+        freeWhenDone = true
+    }
+    
+    deinit {
+        if freeWhenDone {
+//            cmark_node_free(node)
+            // TODO
+//            println("Freeing")
+        }
     }
     
     public var type: cmark_node_type {
@@ -33,11 +48,13 @@ public struct Node: Printable {
     }
     
     public var listType: cmark_list_type {
-        return cmark_node_get_list_type(node)
+        get { return cmark_node_get_list_type(node) }
+        set { cmark_node_set_list_type(node, newValue) }
     }
     
     public var listStart: Int {
-        return Int(cmark_node_get_list_start(node))
+        get { return Int(cmark_node_get_list_start(node)) }
+        set { cmark_node_set_list_start(node, Int32(newValue)) }
     }
     
     public var typeString: String {
@@ -45,33 +62,69 @@ public struct Node: Printable {
     }
     
     public var literal: String? {
-        return stringUnlessNil(cmark_node_get_literal(node))
+        get { return stringUnlessNil(cmark_node_get_literal(node)) }
+        set {
+          if let value = newValue {
+              cmark_node_set_literal(node, value)
+          } else {
+              cmark_node_set_literal(node, nil)
+          }
+        }
     }
     
     public var headerLevel: Int {
-        return Int(cmark_node_get_header_level(node))
+        get { return Int(cmark_node_get_header_level(node)) }
+        set { cmark_node_set_header_level(node, Int32(newValue)) }
     }
     
     public var fenceInfo: String? {
-        return stringUnlessNil(cmark_node_get_fence_info(node))
+        get { return stringUnlessNil(cmark_node_get_fence_info(node)) }
+        set {
+          if let value = newValue {
+              cmark_node_set_fence_info(node, value)
+          } else {
+              cmark_node_set_fence_info(node, nil)
+          }
+        }
     }
     
     public var urlString: String? {
-        return stringUnlessNil(cmark_node_get_url(node))
+        get { return stringUnlessNil(cmark_node_get_url(node)) }
+        set {
+          if let value = newValue {
+              cmark_node_set_url(node, value)
+          } else {
+              cmark_node_set_url(node, nil)
+          }
+        }
     }
     
     public var title: String? {
-        return stringUnlessNil(cmark_node_get_title(node))
+        get { return stringUnlessNil(cmark_node_get_title(node)) }
+        set {
+          if let value = newValue {
+              cmark_node_set_title(node, value)
+          } else {
+              cmark_node_set_title(node, nil)
+          }
+        }
     }
     
     public var children: [Node] {
-        var result: [Node] = []
-        var child = cmark_node_first_child(node)
-        while (child != nil) {
-            result.append(Node(node: child))
-            child = cmark_node_next(child)
+        get {
+            var result: [Node] = []
+            var child = cmark_node_first_child(node)
+            while (child != nil) {
+                result.append(Node(node: child))
+                child = cmark_node_next(child)
+            }
+            return result
         }
-        return result
+        set {
+            for child in newValue {
+                cmark_node_append_child(node, child.node)
+            }
+        }
     }
     
     public var html: String? {
@@ -80,6 +133,10 @@ public struct Node: Printable {
     
     public var xml: String? {
         return stringUnlessNil(cmark_render_xml(node, 0))
+    }
+    
+    public var commonMark: String? {
+        return stringUnlessNil(cmark_render_commonmark(node, CMARK_OPT_DEFAULT, 80))
     }
     
     public var description: String {

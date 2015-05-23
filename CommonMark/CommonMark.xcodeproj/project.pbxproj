@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830EFB071B0F80EF000620FB /* SwiftAST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830EFB061B0F80EF000620FB /* SwiftAST.swift */; };
+		830EFB091B1070C1000620FB /* ASTOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830EFB081B1070C1000620FB /* ASTOperations.swift */; };
 		83A3004D1B0F5DAD00B33E93 /* CommonMark.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A3004C1B0F5DAD00B33E93 /* CommonMark.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83A300531B0F5DAD00B33E93 /* CommonMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A300471B0F5DAD00B33E93 /* CommonMark.framework */; };
 		83A3005A1B0F5DAD00B33E93 /* CommonMarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A300591B0F5DAD00B33E93 /* CommonMarkTests.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830EFB061B0F80EF000620FB /* SwiftAST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftAST.swift; sourceTree = "<group>"; };
+		830EFB081B1070C1000620FB /* ASTOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ASTOperations.swift; sourceTree = "<group>"; };
 		83A300471B0F5DAD00B33E93 /* CommonMark.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonMark.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A3004B1B0F5DAD00B33E93 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83A3004C1B0F5DAD00B33E93 /* CommonMark.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommonMark.h; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				83A300661B0F5DCF00B33E93 /* libcmark.0.19.0.dylib */,
 				83A3004A1B0F5DAD00B33E93 /* Supporting Files */,
 				83A3006B1B0F5DDF00B33E93 /* CommonMark.swift */,
+				830EFB061B0F80EF000620FB /* SwiftAST.swift */,
+				830EFB081B1070C1000620FB /* ASTOperations.swift */,
 			);
 			path = CommonMark;
 			sourceTree = "<group>";
@@ -228,6 +234,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				830EFB071B0F80EF000620FB /* SwiftAST.swift in Sources */,
+				830EFB091B1070C1000620FB /* ASTOperations.swift in Sources */,
 				83A3006C1B0F5DDF00B33E93 /* CommonMark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +441,7 @@
 				83A3005F1B0F5DAD00B33E93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		83A300601B0F5DAD00B33E93 /* Build configuration list for PBXNativeTarget "CommonMarkTests" */ = {
 			isa = XCConfigurationList;
@@ -441,6 +450,7 @@
 				83A300621B0F5DAD00B33E93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

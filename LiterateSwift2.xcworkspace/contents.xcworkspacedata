@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:LiterateSwiftFramework/LiterateSwiftFramework.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:CommonMark/CommonMark.xcodeproj">
    </FileRef>
    <FileRef
