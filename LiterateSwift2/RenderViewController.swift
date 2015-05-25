@@ -26,7 +26,7 @@ class RenderViewController: NSViewController {
     @IBOutlet var webview: WebView!
     
     func loadNode(elements: [Block]) {
-        let doc = document(deepApply(elements, prependLanguage))
+        let doc = document(evaluateAndReplacePrintSwift(deepApply(elements, prependLanguage)))
         webview.mainFrame.loadHTMLString(doc.html, baseURL: nil)
     }
     

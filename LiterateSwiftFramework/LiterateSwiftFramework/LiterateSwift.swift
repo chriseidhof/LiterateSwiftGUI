@@ -10,16 +10,58 @@ import Foundation
 
 import CommonMark
 
-public func codeBlock(element: Block, includeLanguage: String? -> Bool) -> [String] {
+func isCodeBlock(matchingLanguage: String? -> Bool)(element: Block) -> Bool {
+    switch element {
+    case .CodeBlock(let code, let lang) where matchingLanguage(lang):
+        return true
+    default:
+        return false
+
+    }
+
+}
+
+public func codeBlock(element: Block, includeLanguage: String? -> Bool) -> String? {
     switch element {
     case .CodeBlock(let code, let lang) where includeLanguage(lang):
-        return [code]
+        return code
     default:
-        return []
+        return nil
         
     }
 }
 
+public func toArray<A>(optional: A?) -> [A] {
+    if let x = optional {
+        return [x]
+    } else {
+        return []
+    }
+}
+
 public func extractSwift(child: Block) -> [String] {
-    return codeBlock(child, { $0 == "swift"  })
+    return toArray(codeBlock(child, { $0 == "swift"  }))
+}
+
+public func printableSwiftBlocks(child: Block) -> [String] {
+    return toArray(codeBlock(child, { $0 == "print-swift" } ))
+}
+
+func evaluate(swiftCode: String, printableCode: String) -> String {
+    return "> TODO"
+}
+
+public func evaluateAndReplacePrintSwift(document: [Block]) -> [Block] {
+    let isPrintSwift = { codeBlock($0, { $0 == "print-swift" }) }
+    let swiftCode = "\n".join(deepCollect(document, extractSwift))
+    return deepApply(document, {
+        if let code = isPrintSwift($0) {
+            return [
+                Block.CodeBlock(text: code, language: "swift"),
+                Block.CodeBlock(text: evaluate(swiftCode, code), language: "")
+            ]
+        } else {
+            return [$0]
+        }
+    })
 }

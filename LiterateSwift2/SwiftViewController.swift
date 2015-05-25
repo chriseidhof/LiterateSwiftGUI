@@ -15,7 +15,7 @@ class SwiftViewController: NSViewController {
     @IBOutlet var textview: NSTextView?
     
     func loadNode(elements: [Block]) {
-        let text = "\n".join(deepCollect(elements, { codeBlock($0) { $0 == "swift" || $0 == "print-swift" } }))
+        let text = "\n".join(deepCollect(elements, { toArray(codeBlock($0, { $0 == "swift" || $0 == "print-swift" })) }))
         let attributes: [NSObject: AnyObject] = [NSFontAttributeName: NSFont(name: "Monaco", size: 14)!]
         let attributedString = NSAttributedString(string: text, attributes: attributes)
         textview?.textStorage?.setAttributedString(attributedString)
