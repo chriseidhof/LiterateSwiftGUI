@@ -12,6 +12,7 @@
 		837DB9791B0F6AFF007114EC /* LiterateSwiftFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837DB9781B0F6AFF007114EC /* LiterateSwiftFrameworkTests.swift */; };
 		837DB9831B0F6B35007114EC /* LiterateSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837DB9821B0F6B35007114EC /* LiterateSwift.swift */; };
 		837DB9871B0F6BC8007114EC /* CommonMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837DB9861B0F6BC8007114EC /* CommonMark.framework */; };
+		83D71E301B134403000395DE /* Evaluation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D71E2F1B134403000395DE /* Evaluation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		837DB9781B0F6AFF007114EC /* LiterateSwiftFrameworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiterateSwiftFrameworkTests.swift; sourceTree = "<group>"; };
 		837DB9821B0F6B35007114EC /* LiterateSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiterateSwift.swift; sourceTree = "<group>"; };
 		837DB9861B0F6BC8007114EC /* CommonMark.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonMark.framework; path = "../../../Library/Developer/Xcode/DerivedData/LiterateSwift2-gwzqgtijfcmvrtgegjqkoupvzzdp/Build/Products/Debug/CommonMark.framework"; sourceTree = "<group>"; };
+		83D71E2F1B134403000395DE /* Evaluation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evaluation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				837DB96B1B0F6AFF007114EC /* LiterateSwiftFramework.h */,
 				837DB9691B0F6AFF007114EC /* Supporting Files */,
 				837DB9821B0F6B35007114EC /* LiterateSwift.swift */,
+				83D71E2F1B134403000395DE /* Evaluation.swift */,
 			);
 			path = LiterateSwiftFramework;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837DB9831B0F6B35007114EC /* LiterateSwift.swift in Sources */,
+				83D71E301B134403000395DE /* Evaluation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -47,10 +47,6 @@ public func printableSwiftBlocks(child: Block) -> [String] {
     return toArray(codeBlock(child, { $0 == "print-swift" } ))
 }
 
-func evaluate(swiftCode: String, printableCode: String) -> String {
-    return "> TODO"
-}
-
 public func evaluateAndReplacePrintSwift(document: [Block]) -> [Block] {
     let isPrintSwift = { codeBlock($0, { $0 == "print-swift" }) }
     let swiftCode = "\n".join(deepCollect(document, extractSwift))
@@ -58,10 +54,24 @@ public func evaluateAndReplacePrintSwift(document: [Block]) -> [Block] {
         if let code = isPrintSwift($0) {
             return [
                 Block.CodeBlock(text: code, language: "swift"),
-                Block.CodeBlock(text: evaluate(swiftCode, code), language: "")
+                Block.CodeBlock(text: evaluateSwift(swiftCode, expression: code), language: "")
             ]
         } else {
             return [$0]
         }
     })
+}
+
+extension String {
+    var lines: [String] {
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    }
+
+    var words: [String] {
+        return self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+    }
+
+    func writeToFile(destination: String) {
+        writeToFile(destination, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    }
 }
