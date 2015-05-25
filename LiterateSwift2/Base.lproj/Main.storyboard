@@ -637,24 +637,101 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                     </window>
                     <connections>
-                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="window.shadowedContentViewController" id="nsd-lR-9xd"/>
+                        <segue destination="yDO-ei-eba" kind="relationship" relationship="window.shadowedContentViewController" id="3da-nz-7PR"/>
                     </connections>
                 </windowController>
                 <customObject id="6f7-a7-6o1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
+        <!--Tab View Controller-->
+        <scene sceneID="FMB-D5-5Sx">
+            <objects>
+                <customObject id="GYf-hx-fCp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <tabViewController selectedTabViewItemIndex="0" id="yDO-ei-eba" sceneMemberID="viewController">
+                    <tabViewItems>
+                        <tabViewItem identifier="" id="a5f-6g-BDS"/>
+                        <tabViewItem id="V4P-fc-www"/>
+                    </tabViewItems>
+                    <tabView key="tabView" type="noTabsNoBorder" id="JbK-7B-MXZ">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <font key="font" metaFont="message"/>
+                        <tabViewItems/>
+                    </tabView>
+                    <connections>
+                        <segue destination="s7a-Jh-sTi" kind="relationship" relationship="tabItems" id="JgY-gp-YpQ"/>
+                        <segue destination="5gI-5U-AMq" kind="relationship" relationship="tabItems" id="jRO-9X-Chz"/>
+                    </connections>
+                </tabViewController>
+            </objects>
+            <point key="canvasLocation" x="-208" y="574"/>
+        </scene>
+        <!--Swift-->
+        <scene sceneID="RIO-3P-JRb">
+            <objects>
+                <viewController title="Swift" id="s7a-Jh-sTi" customClass="SwiftViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="tRQ-o8-YVQ">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-C0-iL1">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" id="OWi-gu-hDM">
+                                    <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="g8Q-Ss-jyC">
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="133"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="nud-pQ-1Ao">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="YyH-Ww-TlH">
+                                    <rect key="frame" x="224" y="1" width="15" height="133"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="IZU-C0-iL1" secondAttribute="bottom" id="VIf-zu-sdB"/>
+                            <constraint firstItem="IZU-C0-iL1" firstAttribute="top" secondItem="tRQ-o8-YVQ" secondAttribute="top" id="ez5-ML-oLg"/>
+                            <constraint firstItem="IZU-C0-iL1" firstAttribute="leading" secondItem="tRQ-o8-YVQ" secondAttribute="leading" id="hyT-a1-esU"/>
+                            <constraint firstAttribute="trailing" secondItem="IZU-C0-iL1" secondAttribute="trailing" id="qBk-AV-Co0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textview" destination="g8Q-Ss-jyC" id="4GW-Uw-c9f"/>
+                    </connections>
+                </viewController>
+                <customObject id="Ez0-b0-bZ2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="733" y="731"/>
+        </scene>
+        <!--Rendered-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Rendered" id="5gI-5U-AMq" customClass="RenderViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ERx-hH-rdd">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <webView translatesAutoresizingMaskIntoConstraints="NO" id="9Jw-W1-qEJ">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12" plugInsEnabled="NO" javaEnabled="NO" javaScriptCanOpenWindowsAutomatically="NO"/>
+                                <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12" plugInsEnabled="NO" javaEnabled="NO" javaScriptCanOpenWindowsAutomatically="NO">
+                                    <nil key="identifier"/>
+                                </webPreferences>
                             </webView>
                         </subviews>
                         <constraints>
@@ -670,7 +747,7 @@
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-106" y="1235"/>
         </scene>
     </scenes>
 </document>

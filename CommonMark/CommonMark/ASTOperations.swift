@@ -27,7 +27,7 @@ public func deepApply(f: Block -> [Block])(element: Block) -> [Block] {
    }
 }
 
-public func deepCollect<A>(f: Block -> [A])(elements: [Block]) -> [A] {
+public func deepCollect<A>(elements: [Block], f: Block -> [A]) -> [A] {
     return elements.flatMap(deepCollect(f))
 }
 

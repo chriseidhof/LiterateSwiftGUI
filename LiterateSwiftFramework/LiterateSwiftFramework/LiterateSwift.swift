@@ -10,8 +10,16 @@ import Foundation
 
 import CommonMark
 
-public func codeWithLanguage(node: Node, language: String) -> [Node] {
-    return node.children.filter { child in
-        child.fenceInfo == language
+public func codeBlock(element: Block, includeLanguage: String? -> Bool) -> [String] {
+    switch element {
+    case .CodeBlock(let code, let lang) where includeLanguage(lang):
+        return [code]
+    default:
+        return []
+        
     }
+}
+
+public func extractSwift(child: Block) -> [String] {
+    return codeBlock(child, { $0 == "swift"  })
 }

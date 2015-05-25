@@ -11,15 +11,22 @@ import CommonMark
 
 class MarkdownDocument: NSDocument {
     
-    var node: Node? {
+    private var node: Node? {
         didSet {
+            let theElements = elements
             dispatch_async(dispatch_get_main_queue()) {
-                callback?(node)
+                for callback in self.callbacks {
+                    callback(theElements)
+                }
             }
         }
     }
     
-    var callback: (Node? -> ())?
+    var elements: [Block] {
+        return node?.children.map{ parseNode($0)! } ?? []
+    }
+    
+    var callbacks: [[Block] -> ()] = []
 
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
