@@ -12,6 +12,15 @@ func stringUnlessNil(p: UnsafePointer<Int8>) -> String? {
     return p == nil ? nil : String(UTF8String: p)
 }
 
+public func markdownToHTML(markdown: String) -> String? {
+    if let cString = markdown.cStringUsingEncoding(NSUTF8StringEncoding) {
+        let byteSize = markdown.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+        let outString = cmark_markdown_to_html(cString, Int32(byteSize), 0)
+        return String(UTF8String: outString)
+    }
+    return nil
+}
+
 public func parseFile(filename: String) -> Node? {
     let parsed = cmark_parse_file(fopen(filename, "r"), 0)
     if parsed == nil {
@@ -23,23 +32,18 @@ public func parseFile(filename: String) -> Node? {
 
 public class Node: Printable {
     let node: COpaquePointer
-    let freeWhenDone: Bool
     
     init(node: COpaquePointer) {
         self.node = node
-        freeWhenDone = false
     }
     
     init(type: cmark_node_type) {
         self.node = cmark_node_new(type)
-        freeWhenDone = true
     }
     
     deinit {
-        if freeWhenDone {
-//            cmark_node_free(node)
-            // TODO
-//            println("Freeing")
+        if type.value == CMARK_NODE_DOCUMENT.value {
+            cmark_node_free(node)
         }
     }
     
