@@ -16,7 +16,7 @@
 		83A300681B0F5DCF00B33E93 /* cmark_version.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A300641B0F5DCF00B33E93 /* cmark_version.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83A300691B0F5DCF00B33E93 /* cmark.h in Headers */ = {isa = PBXBuildFile; fileRef = 83A300651B0F5DCF00B33E93 /* cmark.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83A3006A1B0F5DCF00B33E93 /* libcmark.0.19.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A300661B0F5DCF00B33E93 /* libcmark.0.19.0.dylib */; };
-		83A3006C1B0F5DDF00B33E93 /* CommonMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3006B1B0F5DDF00B33E93 /* CommonMark.swift */; };
+		83A3006C1B0F5DDF00B33E93 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A3006B1B0F5DDF00B33E93 /* Node.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 		83A300641B0F5DCF00B33E93 /* cmark_version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmark_version.h; sourceTree = "<group>"; };
 		83A300651B0F5DCF00B33E93 /* cmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmark.h; sourceTree = "<group>"; };
 		83A300661B0F5DCF00B33E93 /* libcmark.0.19.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libcmark.0.19.0.dylib; sourceTree = "<group>"; };
-		83A3006B1B0F5DDF00B33E93 /* CommonMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonMark.swift; sourceTree = "<group>"; };
+		83A3006B1B0F5DDF00B33E93 /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 				83A300651B0F5DCF00B33E93 /* cmark.h */,
 				83A300661B0F5DCF00B33E93 /* libcmark.0.19.0.dylib */,
 				83A3004A1B0F5DAD00B33E93 /* Supporting Files */,
-				83A3006B1B0F5DDF00B33E93 /* CommonMark.swift */,
+				83A3006B1B0F5DDF00B33E93 /* Node.swift */,
 				830EFB061B0F80EF000620FB /* SwiftAST.swift */,
 				830EFB081B1070C1000620FB /* ASTOperations.swift */,
 			);
@@ -236,7 +236,7 @@
 			files = (
 				830EFB071B0F80EF000620FB /* SwiftAST.swift in Sources */,
 				830EFB091B1070C1000620FB /* ASTOperations.swift in Sources */,
-				83A3006C1B0F5DDF00B33E93 /* CommonMark.swift in Sources */,
+				83A3006C1B0F5DDF00B33E93 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -42,8 +42,7 @@ extension InlineElement : StringLiteralConvertible {
 }
 
 public enum Block {
-    case List(items: [Block], type: ListType)
-    case ListItem(items: [Block])
+    case List(items: [[Block]], type: ListType)
     case BlockQuote(items: [Block])
     case CodeBlock(text: String, language: String?)
     case Html(text: String)
@@ -52,8 +51,8 @@ public enum Block {
     case HorizontalRule
 }
 
-func parseInlineElement(node: Node) -> InlineElement? {
-    let parseChildren = { node.children.map { parseInlineElement($0)! } }
+func parseInlineElement(node: Node) -> InlineElement {
+    let parseChildren = { map(node.children, parseInlineElement) }
     switch node.type.value {
     case CMARK_NODE_TEXT.value: return InlineElement.Text(text: node.literal!)
     case CMARK_NODE_SOFTBREAK.value: return InlineElement.SoftBreak
@@ -64,13 +63,24 @@ func parseInlineElement(node: Node) -> InlineElement? {
     case CMARK_NODE_STRONG.value: return InlineElement.Strong(children: parseChildren())
     case CMARK_NODE_LINK.value: return InlineElement.Link(children: parseChildren(), title: node.title, url: node.urlString)
     case CMARK_NODE_IMAGE.value: return InlineElement.Image(children: parseChildren(), title: node.title, url: node.urlString)
-    default: return nil
+    default:
+        fatalError("Expected inline element, got \(node.typeString)")
     }
 }
 
-public func parseNode(node: Node) -> Block? {
-    let parseInlineChildren = { node.children.map { parseInlineElement($0)! } }
-    let parseBlockChildren =  { node.children.map { parseNode($0)! } }
+public func parseListItem(node: Node) -> [Block] {
+    switch node.type.value {
+    case CMARK_NODE_ITEM.value:
+        return map(node.children, parseNode)
+    default:
+        println("Unrecognized node \(node.typeString), expected a list item")
+        return []
+    }
+}
+
+public func parseNode(node: Node) -> Block {
+    let parseInlineChildren = { map(node.children, parseInlineElement) }
+    let parseBlockChildren =  { map(node.children, parseNode) }
     switch node.type.value {
     case CMARK_NODE_PARAGRAPH.value:
         return .Paragraph(text: parseInlineChildren())
@@ -78,9 +88,7 @@ public func parseNode(node: Node) -> Block? {
         return Block.BlockQuote(items: parseBlockChildren())
     case CMARK_NODE_LIST.value:
         let type = node.listType.value == CMARK_BULLET_LIST.value ? ListType.Unordered : ListType.Ordered
-        return Block.List(items: parseBlockChildren(), type: type) // todo
-    case CMARK_NODE_ITEM.value:
-        return Block.ListItem(items: parseBlockChildren())
+        return Block.List(items: map(node.children, parseListItem), type: type) // todo
     case CMARK_NODE_CODE_BLOCK.value:
         return Block.CodeBlock(text: node.literal!, language: node.fenceInfo)
     case CMARK_NODE_HTML.value:
@@ -90,8 +98,7 @@ public func parseNode(node: Node) -> Block? {
     case CMARK_NODE_HRULE.value:
         return Block.HorizontalRule
     default:
-        println("Unrecognized node: \(node.typeString)")
-        return nil
+        fatalError("Unrecognized node: \(node.typeString)")
     }
 }
 
@@ -102,24 +109,20 @@ func toNode(element: InlineElement) -> Node {
         node = Node(type: CMARK_NODE_TEXT)
         node.literal = text
     case .Emphasis(let children):
-        node = Node(type: CMARK_NODE_EMPH)
-        node.children = children.map(toNode)
+        node = Node(type: CMARK_NODE_EMPH, elements: children)
     case .SoftBreak: node = Node(type: CMARK_NODE_EMPH)
     case .LineBreak: node = Node(type: CMARK_NODE_EMPH)
     case .Code(let text): 
          node = Node(type: CMARK_NODE_CODE)
          node.literal = text
     case .Strong(let children):
-        node = Node(type: CMARK_NODE_STRONG)
-        node.children = children.map(toNode)
+        node = Node(type: CMARK_NODE_STRONG, elements: children)
     case let .Link(children, title, url):
-        node = Node(type: CMARK_NODE_LINK)
-        node.children = children.map(toNode)
+        node = Node(type: CMARK_NODE_LINK, elements: children)
         node.title = title
         node.urlString = url
     case let .Image(children, title, url):
-        node = Node(type: CMARK_NODE_IMAGE)
-        node.children = children.map(toNode)
+        node = Node(type: CMARK_NODE_IMAGE, elements: children)
         node.title = title
         node.urlString = url
     case .InlineHtml(let text):
@@ -129,22 +132,28 @@ func toNode(element: InlineElement) -> Node {
     return node
 }
 
+extension Node {
+    convenience init(type: cmark_node_type, blocks: [Block]) {
+        self.init(type: type, children: blocks.map(toNode))
+    }
+    convenience init(type: cmark_node_type, elements: [InlineElement]) {
+        self.init(type: type, children: elements.map(toNode))
+    }
+}
+
 func toNode(block: Block) -> Node {
    let node: Node
    switch block {
    case .Paragraph(let children):
-     node = Node(type: CMARK_NODE_PARAGRAPH)
-     node.children = children.map(toNode)
+    node = Node(type: CMARK_NODE_PARAGRAPH, elements: children)
    case let .List(items, type):
-     node = Node(type: CMARK_NODE_LIST)
-     node.children = items.map(toNode)
-     node.listType = CMARK_BULLET_LIST // TODO
-   case .ListItem(let items):
-     node = Node(type: CMARK_NODE_ITEM)
-     node.children = items.map(toNode)
+     let listItems = items.map { listItem in
+         return Node(type: CMARK_NODE_ITEM, blocks: listItem)
+     }
+     node = Node(type: CMARK_NODE_LIST, children: listItems)
+     node.listType = type == .Unordered ? CMARK_BULLET_LIST : CMARK_ORDERED_LIST
    case .BlockQuote(let items):
-     node = Node(type: CMARK_NODE_BLOCK_QUOTE)
-     node.children = items.map(toNode)
+     node = Node(type: CMARK_NODE_BLOCK_QUOTE, blocks: items)
    case let .CodeBlock(text, language):
      node = Node(type: CMARK_NODE_CODE_BLOCK)
      node.fenceInfo = language
@@ -153,19 +162,13 @@ func toNode(block: Block) -> Node {
      node = Node(type: CMARK_NODE_HTML)
      node.literal = text
    case let .Header(text, level):
-     node = Node(type: CMARK_NODE_HEADER)
-     node.children = text.map(toNode)
+     node = Node(type: CMARK_NODE_HEADER, elements: text)
    case .HorizontalRule:
      node = Node(type: CMARK_NODE_HRULE)
    }
    return node
-    
-    
-    
 }
 
 public func document(blocks: [Block]) -> Node {
-    let node = Node(type: CMARK_NODE_DOCUMENT)
-    node.children = blocks.map(toNode)
-    return node
+    return Node(type: CMARK_NODE_DOCUMENT, blocks: blocks)
 }

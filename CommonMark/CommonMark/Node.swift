@@ -12,6 +12,13 @@ func stringUnlessNil(p: UnsafePointer<Int8>) -> String? {
     return p == nil ? nil : String(UTF8String: p)
 }
 
+func cString(input: String) -> ([CChar], Int)? {
+    if let cString = input.cStringUsingEncoding(NSUTF8StringEncoding) {
+        return (cString, cString.count-1)
+    }
+    return nil
+}
+
 public func markdownToHTML(markdown: String) -> String? {
     if let cString = markdown.cStringUsingEncoding(NSUTF8StringEncoding) {
         let byteSize = markdown.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
@@ -30,6 +37,16 @@ public func parseFile(filename: String) -> Node? {
     }
 }
 
+public func parseString(string: String) -> Node? {
+    if let (cString, length) = cString(string) {
+        let parsed = cmark_parse_document(cString, length, 0)
+        if parsed != nil {
+            return Node(node: parsed)
+        }
+    }
+    return nil
+}
+
 public class Node: Printable {
     let node: COpaquePointer
     
@@ -37,8 +54,11 @@ public class Node: Printable {
         self.node = node
     }
     
-    init(type: cmark_node_type) {
-        self.node = cmark_node_new(type)
+    init(type: cmark_node_type, children: [Node] = []) {
+        node = cmark_node_new(type)
+        for child in children {
+            cmark_node_append_child(node, child.node)
+        }
     }
     
     deinit {
@@ -115,22 +135,15 @@ public class Node: Printable {
     }
     
     public var children: [Node] {
-        get {
-            var result: [Node] = []
-            var child = cmark_node_first_child(node)
-            while (child != nil) {
-                result.append(Node(node: child))
-                child = cmark_node_next(child)
-            }
-            return result
+        var result: [Node] = []
+        var child = cmark_node_first_child(node)
+        while (child != nil) {
+            result.append(Node(node: child))
+            child = cmark_node_next(child)
         }
-        set {
-            for child in newValue {
-                cmark_node_append_child(node, child.node)
-            }
-        }
+        return result
     }
-    
+
     public var html: String? {
         return stringUnlessNil(cmark_render_html(node, 0))
     }
@@ -144,6 +157,6 @@ public class Node: Printable {
     }
     
     public var description: String {
-        return "\(typeString) {\n \(literal ?? String())\(children.description ?? String()) \n}"
+        return "\(typeString) {\n \(literal ?? String())\(Array(children).description ?? String()) \n}"
     }
 }

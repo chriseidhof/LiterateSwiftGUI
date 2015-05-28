@@ -23,7 +23,7 @@ class MarkdownDocument: NSDocument {
     }
     
     var elements: [Block] {
-        return node?.children.map{ parseNode($0)! } ?? []
+        return node?.children.map(parseNode) ?? []
     }
     
     var callbacks: [[Block] -> ()] = []
