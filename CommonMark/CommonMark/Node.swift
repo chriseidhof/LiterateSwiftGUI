@@ -8,6 +8,19 @@
 
 import Foundation
 
+public func ==(x: cmark_list_type, y: cmark_list_type) -> Bool {
+    return x.value == y.value
+}
+
+public func ==(x: cmark_node_type, y: cmark_node_type) -> Bool {
+    return x.value == y.value
+}
+
+public func ~=(x: cmark_node_type, y: cmark_node_type) -> Bool {
+    return x == y
+}
+
+
 func stringUnlessNil(p: UnsafePointer<Int8>) -> String? {
     return p == nil ? nil : String(UTF8String: p)
 }
