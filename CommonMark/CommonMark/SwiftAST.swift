@@ -105,15 +105,13 @@ func toNode(element: InlineElement) -> Node {
     let node: Node
     switch element {
     case .Text(let text):
-        node = Node(type: CMARK_NODE_TEXT)
-        node.literal = text
+        node = Node(type: CMARK_NODE_TEXT, literal: text)
     case .Emphasis(let children):
         node = Node(type: CMARK_NODE_EMPH, elements: children)
     case .SoftBreak: node = Node(type: CMARK_NODE_EMPH)
     case .LineBreak: node = Node(type: CMARK_NODE_EMPH)
     case .Code(let text): 
-         node = Node(type: CMARK_NODE_CODE)
-         node.literal = text
+         node = Node(type: CMARK_NODE_CODE, literal: text)
     case .Strong(let children):
         node = Node(type: CMARK_NODE_STRONG, elements: children)
     case let .Link(children, title, url):
@@ -125,13 +123,16 @@ func toNode(element: InlineElement) -> Node {
         node.title = title
         node.urlString = url
     case .InlineHtml(let text):
-         node = Node(type: CMARK_NODE_INLINE_HTML)
-         node.literal = text
+         node = Node(type: CMARK_NODE_INLINE_HTML, literal: text)
     }
     return node
 }
 
 extension Node {
+    convenience init(type: cmark_node_type, literal: String) {
+        self.init(type: type)
+        self.literal = literal
+    }
     convenience init(type: cmark_node_type, blocks: [Block]) {
         self.init(type: type, children: blocks.map(toNode))
     }
@@ -154,12 +155,10 @@ func toNode(block: Block) -> Node {
    case .BlockQuote(let items):
      node = Node(type: CMARK_NODE_BLOCK_QUOTE, blocks: items)
    case let .CodeBlock(text, language):
-     node = Node(type: CMARK_NODE_CODE_BLOCK)
+     node = Node(type: CMARK_NODE_CODE_BLOCK, literal: text)
      node.fenceInfo = language
-     node.literal = text
    case .Html(let text):
-     node = Node(type: CMARK_NODE_HTML)
-     node.literal = text
+     node = Node(type: CMARK_NODE_HTML, literal: text)
    case let .Header(text, level):
      node = Node(type: CMARK_NODE_HEADER, elements: text)
    case .HorizontalRule:
