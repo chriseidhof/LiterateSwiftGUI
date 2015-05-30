@@ -75,7 +75,7 @@ public class Node: Printable {
     }
     
     deinit {
-        if type.value == CMARK_NODE_DOCUMENT.value {
+        if type == CMARK_NODE_DOCUMENT {
             cmark_node_free(node)
         }
     }

@@ -21,12 +21,24 @@ func prependLanguage(child: Block) -> [Block] {
         }
 }
 
+func tableOfContents(blocks: [Block]) -> [Block] {
+    let headers = deepCollect(blocks) { (b: Block) -> [Block] in
+        switch b {
+        case let .Header(text, level):
+            let prepend = String(Array(count: level, repeatedValue: "#")) + " "
+            return [Block.Paragraph(text: [InlineElement.Text(text: prepend)] + text)]
+        default: return []
+        }
+    }
+    return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
+}
+
 class RenderViewController: NSViewController {
 
     @IBOutlet var webview: WebView!
     
     func loadNode(elements: [Block]) {
-        let doc = document(evaluateAndReplacePrintSwift(deepApply(elements, prependLanguage)))
+        let doc = document(evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, prependLanguage)))
         webview.mainFrame.loadHTMLString(doc.html, baseURL: nil)
     }
     

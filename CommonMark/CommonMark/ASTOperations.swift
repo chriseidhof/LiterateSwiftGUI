@@ -8,6 +8,11 @@
 
 import Foundation
 
+func flatten<A>(x: [[A]]) -> [A] {
+    return x.flatMap { $0 }
+}
+
+
 public func deepApply(elements: [Block], f: Block -> [Block]) -> [Block] {
     return elements.flatMap(deepApply(f))
 }
@@ -16,7 +21,7 @@ public func deepApply(f: Block -> [Block])(element: Block) -> [Block] {
    let recurse: Block -> [Block] = deepApply(f)
    switch element {
    case let .List(items, type):
-    let mapped = Block.List(items: map(items) { flatMap($0, recurse) }, type: type)
+     let mapped = Block.List(items: map(items) { flatMap($0, recurse) }, type: type)
      return f(mapped)
    case .BlockQuote(let items):
      return f(Block.BlockQuote(items: items.flatMap(recurse)))
@@ -27,10 +32,6 @@ public func deepApply(f: Block -> [Block])(element: Block) -> [Block] {
 
 public func deepCollect<A>(elements: [Block], f: Block -> [A]) -> [A] {
     return elements.flatMap(deepCollect(f))
-}
-
-func flatten<A>(x: [[A]]) -> [A] {
-    return x.flatMap { $0 }
 }
 
 public func deepCollect<A>(f: Block -> [A])(element: Block) -> [A] {
@@ -49,15 +50,8 @@ public func deepFilter(f: Block -> Bool)(elements: [Block]) -> [Block] {
     return elements.flatMap(deepFilter(f))
 }
 
-public func deepFilter(f: Block -> Bool)(element: Block) -> [Block] {
-    let recurse: Block -> [Block] = deepFilter(f)
-    let selff = f(element) ? [element] : []
-    switch element {
-    case let .List(items, type):
-        return flatMap(flatten(items), recurse) + selff
-    case .BlockQuote(let items):
-        return flatMap(items, recurse) + selff
-    default:
-        return selff
+public func deepFilter(f: Block -> Bool) -> Block -> [Block] {
+    return deepCollect { element in
+        return f(element) ? [element] : []
     }
 }

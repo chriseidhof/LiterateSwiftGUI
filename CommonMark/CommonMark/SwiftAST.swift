@@ -101,33 +101,6 @@ public func parseBlock(node: Node) -> Block {
     }
 }
 
-func toNode(element: InlineElement) -> Node {
-    let node: Node
-    switch element {
-    case .Text(let text):
-        node = Node(type: CMARK_NODE_TEXT, literal: text)
-    case .Emphasis(let children):
-        node = Node(type: CMARK_NODE_EMPH, elements: children)
-    case .SoftBreak: node = Node(type: CMARK_NODE_EMPH)
-    case .LineBreak: node = Node(type: CMARK_NODE_EMPH)
-    case .Code(let text): 
-         node = Node(type: CMARK_NODE_CODE, literal: text)
-    case .Strong(let children):
-        node = Node(type: CMARK_NODE_STRONG, elements: children)
-    case let .Link(children, title, url):
-        node = Node(type: CMARK_NODE_LINK, elements: children)
-        node.title = title
-        node.urlString = url
-    case let .Image(children, title, url):
-        node = Node(type: CMARK_NODE_IMAGE, elements: children)
-        node.title = title
-        node.urlString = url
-    case .InlineHtml(let text):
-         node = Node(type: CMARK_NODE_INLINE_HTML, literal: text)
-    }
-    return node
-}
-
 extension Node {
     convenience init(type: cmark_node_type, literal: String) {
         self.init(type: type)
@@ -141,15 +114,41 @@ extension Node {
     }
 }
 
+
+func toNode(element: InlineElement) -> Node {
+    let node: Node
+    switch element {
+    case .Text(let text):
+        node = Node(type: CMARK_NODE_TEXT, literal: text)
+    case .Emphasis(let children):
+        node = Node(type: CMARK_NODE_EMPH, elements: children)
+    case .Code(let text):
+         node = Node(type: CMARK_NODE_CODE, literal: text)
+    case .Strong(let children):
+        node = Node(type: CMARK_NODE_STRONG, elements: children)
+    case .InlineHtml(let text):
+        node = Node(type: CMARK_NODE_INLINE_HTML, literal: text)
+    case let .Link(children, title, url):
+        node = Node(type: CMARK_NODE_LINK, elements: children)
+        node.title = title
+        node.urlString = url
+    case let .Image(children, title, url):
+        node = Node(type: CMARK_NODE_IMAGE, elements: children)
+        node.title = title
+        node.urlString = url
+    case .SoftBreak: node = Node(type: CMARK_NODE_SOFTBREAK)
+    case .LineBreak: node = Node(type: CMARK_NODE_LINEBREAK)
+    }
+    return node
+}
+
 func toNode(block: Block) -> Node {
    let node: Node
    switch block {
    case .Paragraph(let children):
-    node = Node(type: CMARK_NODE_PARAGRAPH, elements: children)
+     node = Node(type: CMARK_NODE_PARAGRAPH, elements: children)
    case let .List(items, type):
-     let listItems = items.map {
-         Node(type: CMARK_NODE_ITEM, blocks: $0)
-     }
+     let listItems = items.map { Node(type: CMARK_NODE_ITEM, blocks: $0) }
      node = Node(type: CMARK_NODE_LIST, children: listItems)
      node.listType = type == .Unordered ? CMARK_BULLET_LIST : CMARK_ORDERED_LIST
    case .BlockQuote(let items):
