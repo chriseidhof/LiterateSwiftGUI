@@ -50,7 +50,7 @@ public func printableSwiftBlocks(child: Block) -> [String] {
 public func evaluateAndReplacePrintSwift(document: [Block]) -> [Block] {
     let isPrintSwift = { codeBlock($0, { $0 == "print-swift" }) }
     let swiftCode = "\n".join(deepCollect(document, extractSwift))
-    return deepApply(document, {
+    let eval: Block -> [Block] = {
         if let code = isPrintSwift($0) {
             return [
                 Block.CodeBlock(text: code, language: "swift"),
@@ -59,7 +59,8 @@ public func evaluateAndReplacePrintSwift(document: [Block]) -> [Block] {
         } else {
             return [$0]
         }
-    })
+    }
+    return deepApply(document, eval)
 }
 
 extension String {

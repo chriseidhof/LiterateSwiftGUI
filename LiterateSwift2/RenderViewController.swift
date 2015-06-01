@@ -21,6 +21,41 @@ func prependLanguage(child: Block) -> [Block] {
         }
 }
 
+func stripLink(child: InlineElement) -> [InlineElement] {
+    switch child {
+    case let .Link(children, title, url):
+        return children
+    default:
+        return [child]
+    }
+}
+
+
+func addFootnote() -> InlineElement -> [InlineElement] {
+    var counter = 0
+    return { child in
+        switch child {
+        case let .Link(children, title, url):
+            counter++
+            return children + [InlineElement.InlineHtml(text: "<sup>\(counter)</sup>")]
+        default:
+            return [child]
+        }
+    }
+}
+
+func linkURLs(blocks: [Block]) -> [String?] {
+    return deepCollect(blocks) { (element: InlineElement) -> [String?] in
+        switch element {
+        case let .Link(children, title, url):
+            return [url]
+        default:
+            return []
+        }
+
+    }
+}
+
 func tableOfContents(blocks: [Block]) -> [Block] {
     let headers = deepCollect(blocks) { (b: Block) -> [Block] in
         switch b {
@@ -33,13 +68,14 @@ func tableOfContents(blocks: [Block]) -> [Block] {
     return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
 }
 
+
 class RenderViewController: NSViewController {
 
     @IBOutlet var webview: WebView!
     
     func loadNode(elements: [Block]) {
-        let doc = document(evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, prependLanguage)))
-        webview.mainFrame.loadHTMLString(doc.html, baseURL: nil)
+        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, prependLanguage))
+        webview.mainFrame.loadHTMLString(document(elements).html, baseURL: nil)
     }
     
     override func viewDidAppear() {

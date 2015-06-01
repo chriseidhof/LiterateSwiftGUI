@@ -114,6 +114,12 @@ extension Node {
     }
 }
 
+extension Node {
+    public var elements: [Block] {
+        return children.map(parseBlock)
+    }
+}
+
 
 func toNode(element: InlineElement) -> Node {
     let node: Node

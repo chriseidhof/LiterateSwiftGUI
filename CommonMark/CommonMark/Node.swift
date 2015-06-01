@@ -80,25 +80,25 @@ public class Node: Printable {
         }
     }
     
-    public var type: cmark_node_type {
+    var type: cmark_node_type {
         return cmark_node_get_type(node)
     }
     
-    public var listType: cmark_list_type {
+    var listType: cmark_list_type {
         get { return cmark_node_get_list_type(node) }
         set { cmark_node_set_list_type(node, newValue) }
     }
     
-    public var listStart: Int {
+    var listStart: Int {
         get { return Int(cmark_node_get_list_start(node)) }
         set { cmark_node_set_list_start(node, Int32(newValue)) }
     }
     
-    public var typeString: String {
+    var typeString: String {
         return String(UTF8String: cmark_node_get_type_string(node))!
     }
     
-    public var literal: String? {
+    var literal: String? {
         get { return stringUnlessNil(cmark_node_get_literal(node)) }
         set {
           if let value = newValue {
@@ -109,12 +109,12 @@ public class Node: Printable {
         }
     }
     
-    public var headerLevel: Int {
+    var headerLevel: Int {
         get { return Int(cmark_node_get_header_level(node)) }
         set { cmark_node_set_header_level(node, Int32(newValue)) }
     }
     
-    public var fenceInfo: String? {
+    var fenceInfo: String? {
         get { return stringUnlessNil(cmark_node_get_fence_info(node)) }
         set {
           if let value = newValue {
@@ -125,7 +125,7 @@ public class Node: Printable {
         }
     }
     
-    public var urlString: String? {
+    var urlString: String? {
         get { return stringUnlessNil(cmark_node_get_url(node)) }
         set {
           if let value = newValue {
@@ -136,7 +136,7 @@ public class Node: Printable {
         }
     }
     
-    public var title: String? {
+    var title: String? {
         get { return stringUnlessNil(cmark_node_get_title(node)) }
         set {
           if let value = newValue {
@@ -147,7 +147,7 @@ public class Node: Printable {
         }
     }
     
-    public var children: [Node] {
+    var children: [Node] {
         var result: [Node] = []
         var child = cmark_node_first_child(node)
         while (child != nil) {
