@@ -9,11 +9,11 @@
 import Foundation
 
 public func ==(x: cmark_list_type, y: cmark_list_type) -> Bool {
-    return x.value == y.value
+    return x.rawValue == y.rawValue
 }
 
 public func ==(x: cmark_node_type, y: cmark_node_type) -> Bool {
-    return x.value == y.value
+    return x.rawValue == y.rawValue
 }
 
 public func ~=(x: cmark_node_type, y: cmark_node_type) -> Bool {
@@ -26,41 +26,41 @@ func stringUnlessNil(p: UnsafePointer<Int8>) -> String? {
 }
 
 func cString(input: String) -> ([CChar], Int)? {
-    if let cString = input.cStringUsingEncoding(NSUTF8StringEncoding) {
-        return (cString, cString.count-1)
-    }
-    return nil
+    guard let cString = input.cStringUsingEncoding(NSUTF8StringEncoding) else { return nil }
+    return (cString, cString.count-1)
 }
 
 public func markdownToHTML(markdown: String) -> String? {
-    if let cString = markdown.cStringUsingEncoding(NSUTF8StringEncoding) {
-        let byteSize = markdown.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
-        let outString = cmark_markdown_to_html(cString, Int32(byteSize), 0)
-        return String(UTF8String: outString)
+    guard let cString = markdown.cStringUsingEncoding(NSUTF8StringEncoding) else { return nil }
+    let byteSize = markdown.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+    let outString = cmark_markdown_to_html(cString, Int32(byteSize), 0)
+    return String(UTF8String: outString)
+}
+
+
+
+extension COpaquePointer {
+    func mapIfNonNil<U>(transform: COpaquePointer->U) -> U? {
+        if self == nil {
+            return nil
+        } else {
+            return transform(self)
+        }
     }
-    return nil
 }
 
 public func parseFile(filename: String) -> Node? {
     let parsed = cmark_parse_file(fopen(filename, "r"), 0)
-    if parsed == nil {
-        return nil
-    } else {
-        return Node(node: parsed)
-    }
+    return parsed.mapIfNonNil { Node(node: $0) }
 }
 
 public func parseString(string: String) -> Node? {
-    if let (cString, length) = cString(string) {
-        let parsed = cmark_parse_document(cString, length, 0)
-        if parsed != nil {
-            return Node(node: parsed)
-        }
-    }
-    return nil
+    guard let (cString, length) = cString(string) else { return nil }
+    let parsed = cmark_parse_document(cString, length, 0)
+    return parsed.mapIfNonNil { Node(node: $0) }
 }
 
-public class Node: Printable {
+public class Node: CustomStringConvertible {
     let node: COpaquePointer
     
     init(node: COpaquePointer) {
@@ -150,21 +150,24 @@ public class Node: Printable {
     var children: [Node] {
         var result: [Node] = []
         var child = cmark_node_first_child(node)
-        while (child != nil) {
+        while child != nil {
             result.append(Node(node: child))
             child = cmark_node_next(child)
         }
         return result
     }
 
+    /// Renders the HTML representation
     public var html: String? {
         return stringUnlessNil(cmark_render_html(node, 0))
     }
     
+    /// Renders the XML representation
     public var xml: String? {
         return stringUnlessNil(cmark_render_xml(node, 0))
     }
     
+    /// Renders the CommonMark representation
     public var commonMark: String? {
         return stringUnlessNil(cmark_render_commonmark(node, CMARK_OPT_DEFAULT, 80))
     }

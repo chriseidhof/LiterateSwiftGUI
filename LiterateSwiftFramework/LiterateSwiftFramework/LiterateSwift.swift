@@ -12,7 +12,7 @@ import CommonMark
 
 func isCodeBlock(matchingLanguage: String? -> Bool)(element: Block) -> Bool {
     switch element {
-    case .CodeBlock(let code, let lang) where matchingLanguage(lang):
+    case .CodeBlock(_, let lang) where matchingLanguage(lang):
         return true
     default:
         return false
@@ -21,7 +21,7 @@ func isCodeBlock(matchingLanguage: String? -> Bool)(element: Block) -> Bool {
 
 }
 
-public func codeBlock(element: Block, includeLanguage: String? -> Bool) -> String? {
+public func codeBlock(element: Block, _ includeLanguage: String? -> Bool) -> String? {
     switch element {
     case .CodeBlock(let code, let lang) where includeLanguage(lang):
         return code
@@ -73,6 +73,9 @@ extension String {
     }
 
     func writeToFile(destination: String) {
-        writeToFile(destination, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        do {
+            try writeToFile(destination, atomically: true, encoding: NSUTF8StringEncoding)
+        } catch _ {
+        }
     }
 }

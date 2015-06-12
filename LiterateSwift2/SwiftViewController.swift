@@ -16,17 +16,15 @@ class SwiftViewController: NSViewController {
     
     func loadNode(elements: [Block]) {
         let text = "\n".join(deepCollect(elements, { toArray(codeBlock($0, { $0 == "swift" || $0 == "print-swift" })) }))
-        let attributes: [NSObject: AnyObject] = [NSFontAttributeName: NSFont(name: "Monaco", size: 14)!]
+        let attributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Monaco", size: 14)!]
         let attributedString = NSAttributedString(string: text, attributes: attributes)
         textview?.textStorage?.setAttributedString(attributedString)
     }
 
     override func viewDidAppear() {
-        if let doc = view.window?.windowController()?.document as? MarkdownDocument {
-            doc.callbacks.append(self.loadNode)
-            loadNode(doc.elements)
-        }
-        
+        guard let doc = view.window?.windowController?.document as? MarkdownDocument else { return }
+        doc.callbacks.append(self.loadNode)
+        loadNode(doc.elements)
     }
 
 }

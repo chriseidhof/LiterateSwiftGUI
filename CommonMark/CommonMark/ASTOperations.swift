@@ -13,11 +13,11 @@ func flatten<A>(x: [[A]]) -> [A] {
 }
 
 
-public func deepApply(elements: [Block], f: Block -> [Block]) -> [Block] {
+public func deepApply(elements: [Block], _ f: Block -> [Block]) -> [Block] {
     return elements.flatMap(deepApply(f))
 }
 
-public func deepApply(elements: [Block], f: InlineElement -> [InlineElement]) -> [Block] {
+public func deepApply(elements: [Block], _ f: InlineElement -> [InlineElement]) -> [Block] {
     return elements.flatMap(deepApply(f))
 }
 
@@ -26,7 +26,7 @@ public func deepApply(f: Block -> [Block])(element: Block) -> [Block] {
    let recurse: Block -> [Block] = deepApply(f)
    switch element {
    case let .List(items, type):
-     let mapped = Block.List(items: map(items) { flatMap($0, recurse) }, type: type)
+     let mapped = Block.List(items: items.map { $0.flatMap(recurse) }, type: type)
      return f(mapped)
    case .BlockQuote(let items):
      return f(Block.BlockQuote(items: items.flatMap(recurse)))
@@ -42,7 +42,7 @@ public func deepApply(f: InlineElement -> [InlineElement])(element: Block) -> [B
     case .Paragraph(let children):
         return [Block.Paragraph(text: children.flatMap(applyInline))]
     case let .List(items, type):
-        return [Block.List(items: map(items) { flatMap($0, recurse) }, type: type)]
+        return [Block.List(items: items.map { $0.flatMap(recurse) }, type: type)]
     case .BlockQuote(let items):
         return [Block.BlockQuote(items: items.flatMap(recurse))]
     case let .Header(text, level):
@@ -70,11 +70,11 @@ public func deepApply(f: InlineElement -> [InlineElement])(element: InlineElemen
 }
 
 
-public func deepCollect<A>(elements: [Block], f: Block -> [A]) -> [A] {
+public func deepCollect<A>(elements: [Block], _ f: Block -> [A]) -> [A] {
     return elements.flatMap(deepCollect(f))
 }
 
-public func deepCollect<A>(elements: [Block], f: InlineElement -> [A]) -> [A] {
+public func deepCollect<A>(elements: [Block], _ f: InlineElement -> [A]) -> [A] {
     return elements.flatMap(deepCollect(f))
 }
 
@@ -82,9 +82,9 @@ private func deepCollect<A>(f: Block -> [A])(element: Block) -> [A] {
    let recurse: Block -> [A] = deepCollect(f)
    switch element {
    case .List(let items, _):
-    return flatMap(flatten(items), recurse) + f(element)
+    return flatten(items).flatMap(recurse) + f(element)
    case .BlockQuote(let items):
-     return flatMap(items, recurse) + f(element)
+     return items.flatMap(recurse) + f(element)
    default:
      return f(element)
    }
@@ -96,11 +96,11 @@ private func deepCollect<A>(f: InlineElement -> [A])(element: Block) -> [A] {
     switch element {
     case .Paragraph(let children):
         return children.flatMap(collectInline)
-    case let .List(items, type):
+    case let .List(items, _):
         return flatten(items).flatMap(recurse)
     case .BlockQuote(let items):
         return items.flatMap(recurse)
-    case let .Header(text, level):
+    case let .Header(text, _):
         return text.flatMap(collectInline)
     default:
         return []
@@ -114,9 +114,9 @@ private func deepCollect<A>(f: InlineElement -> [A])(element: InlineElement) -> 
         return children.flatMap(recurse) + f(element)
     case .Strong(let children):
         return children.flatMap(recurse) + f(element)
-    case let .Link(children, title, url):
+    case let .Link(children, _, _):
         return children.flatMap(recurse) + f(element)
-    case let .Image(children, title, url):
+    case let .Image(children, _, _):
         return children.flatMap(recurse) + f(element)
     default:
         return f(element)

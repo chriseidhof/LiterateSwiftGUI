@@ -17,6 +17,7 @@
 		838B51891B0F5C7C00137358 /* LiterateSwift2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B51881B0F5C7C00137358 /* LiterateSwift2Tests.swift */; };
 		83A3006E1B0F5E6F00B33E93 /* CommonMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A3006D1B0F5E6F00B33E93 /* CommonMark.framework */; };
 		83D71E2E1B132AD5000395DE /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D71E2D1B132AD5000395DE /* SwiftViewController.swift */; };
+		83EE3D511B2B524800FFB51F /* PlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		838B51881B0F5C7C00137358 /* LiterateSwift2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiterateSwift2Tests.swift; sourceTree = "<group>"; };
 		83A3006D1B0F5E6F00B33E93 /* CommonMark.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonMark.framework; path = CommonMark/build/Debug/CommonMark.framework; sourceTree = "<group>"; };
 		83D71E2D1B132AD5000395DE /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewController.swift; sourceTree = "<group>"; };
+		83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 				838B517B1B0F5C7C00137358 /* Main.storyboard */,
 				838B51711B0F5C7C00137358 /* Supporting Files */,
 				83D71E2D1B132AD5000395DE /* SwiftViewController.swift */,
+				83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */,
 			);
 			path = LiterateSwift2;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 		838B51661B0F5C7C00137358 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Unsigned Integer";
 				TargetAttributes = {
@@ -229,6 +233,7 @@
 				83D71E2E1B132AD5000395DE /* SwiftViewController.swift in Sources */,
 				838B51761B0F5C7C00137358 /* RenderViewController.swift in Sources */,
 				838B51741B0F5C7C00137358 /* AppDelegate.swift in Sources */,
+				83EE3D511B2B524800FFB51F /* PlaygroundViewController.swift in Sources */,
 				838B51781B0F5C7C00137358 /* MarkdownDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

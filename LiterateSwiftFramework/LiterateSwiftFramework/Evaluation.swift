@@ -8,7 +8,7 @@
 
 import Foundation
 
-private func exec(#commandPath: String, #workingDirectory: String, #arguments: [String]) -> (output: String, stderr: String) {
+private func exec(commandPath commandPath: String, workingDirectory: String, arguments: [String]) -> (output: String, stderr: String) {
     let task = NSTask()
     task.currentDirectoryPath = workingDirectory
     task.launchPath = commandPath
@@ -42,9 +42,9 @@ private func printstderr(s: String) {
     NSFileHandle.fileHandleWithStandardError().writeData(s.dataUsingEncoding(NSUTF8StringEncoding)!)
 }
 
-func evaluateSwift(code: String, #expression: String) -> String {
-    let hasPrintlnStatements = !(expression.rangeOfString("println", options: NSStringCompareOptions.allZeros, range: nil, locale: nil) == nil)
-    var expressionLines: [String] = expression.lines.filter { count($0) > 0 }
+func evaluateSwift(code: String, expression: String) -> String {
+    let hasPrintlnStatements = !(expression.rangeOfString("println", options: NSStringCompareOptions(), range: nil, locale: nil) == nil)
+    var expressionLines: [String] = expression.lines.filter { $0.characters.count > 0 }
     let contents: String
     if !hasPrintlnStatements {
         let lastLine = expressionLines.removeLast()
@@ -60,7 +60,7 @@ func evaluateSwift(code: String, #expression: String) -> String {
     let filename = "/tmp".stringByAppendingPathComponent(basename!)
 
     contents.writeToFile(filename)
-    var arguments: [String] =  "--sdk macosx swiftc".words
+    let arguments: [String] =  "--sdk macosx swiftc".words
     let objectName = base.stringByAppendingPathExtension("o")!
     ignoreOutputAndPrintStdErr(exec(commandPath:"/usr/bin/xcrun", workingDirectory:"/tmp", arguments:arguments + ["-c", filename]))
     ignoreOutputAndPrintStdErr(exec(commandPath: "/usr/bin/xcrun", workingDirectory: "/tmp", arguments: arguments + ["-o", "app", objectName]))

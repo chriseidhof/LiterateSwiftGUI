@@ -30,7 +30,7 @@ class MarkdownDocument: NSDocument {
 
     override func makeWindowControllers() {
         // Returns the Storyboard that contains your Document window.
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)!
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let windowController = storyboard.instantiateControllerWithIdentifier("Document Window Controller") as! NSWindowController
         self.addWindowController(windowController)
     }
@@ -38,11 +38,9 @@ class MarkdownDocument: NSDocument {
     func reload() {
         node = fileURL?.path.flatMap(parseFile)
     }
-   
-    override func readFromURL(url: NSURL, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
+
+    override func readFromURL(url: NSURL, ofType typeName: String) throws {
         reload()
- 
-        return true
     }
     
     override func presentedItemDidChange() {

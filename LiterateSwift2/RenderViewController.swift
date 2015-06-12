@@ -12,33 +12,27 @@ import CommonMark
 import LiterateSwiftFramework
 
 func prependLanguage(child: Block) -> [Block] {
-        switch child {
-        case .CodeBlock(let t, let language) where language != nil:
-            let explanation = Block.Paragraph(text: [.Text(text: "Example: "), .Emphasis(children: [.Text(text: language!)])])
-            return [explanation, child]
-        default:
-            return [child]
-        }
+    guard case let .CodeBlock(_, language) = child where language != nil else { return [child] }
+
+    let explanation = Block.Paragraph(text: [.Text(text: "Example: "), .Emphasis(children: [.Text(text: language!)])])
+    return [explanation, child]
 }
 
 func stripLink(child: InlineElement) -> [InlineElement] {
-    switch child {
-    case let .Link(children, title, url):
+    if case let .Link(children, _, _) = child {
         return children
-    default:
-        return [child]
     }
+    return [child]
 }
 
 
 func addFootnote() -> InlineElement -> [InlineElement] {
     var counter = 0
     return { child in
-        switch child {
-        case let .Link(children, title, url):
+        if case let .Link(children, _, _) = child {
             counter++
             return children + [InlineElement.InlineHtml(text: "<sup>\(counter)</sup>")]
-        default:
+        } else {
             return [child]
         }
     }
@@ -46,24 +40,16 @@ func addFootnote() -> InlineElement -> [InlineElement] {
 
 func linkURLs(blocks: [Block]) -> [String?] {
     return deepCollect(blocks) { (element: InlineElement) -> [String?] in
-        switch element {
-        case let .Link(children, title, url):
-            return [url]
-        default:
-            return []
-        }
-
+        guard case let .Link(_, _, url) = element else { return [] }
+        return [url]
     }
 }
 
 func tableOfContents(blocks: [Block]) -> [Block] {
     let headers = deepCollect(blocks) { (b: Block) -> [Block] in
-        switch b {
-        case let .Header(text, level):
-            let prepend = String(Array(count: level, repeatedValue: "#")) + " "
-            return [Block.Paragraph(text: [InlineElement.Text(text: prepend)] + text)]
-        default: return []
-        }
+        guard case let .Header(text, level) = b else { return [] }
+        let prepend = String(Array(count: level, repeatedValue: "#")) + " "
+        return [Block.Paragraph(text: [InlineElement.Text(text: prepend)] + text)]
     }
     return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
 }
@@ -75,11 +61,11 @@ class RenderViewController: NSViewController {
     
     func loadNode(elements: [Block]) {
         let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, prependLanguage))
-        webview.mainFrame.loadHTMLString(document(elements).html, baseURL: nil)
+        webview.mainFrame.loadHTMLString(Node(blocks: elements).html, baseURL: nil)
     }
     
     override func viewDidAppear() {
-        if let doc = view.window?.windowController()?.document as? MarkdownDocument {
+        if let doc = view.window?.windowController?.document as? MarkdownDocument {
             doc.callbacks.append(self.loadNode)
             loadNode(doc.elements)
         }

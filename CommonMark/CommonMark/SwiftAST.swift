@@ -112,6 +112,10 @@ extension Node {
     convenience init(type: cmark_node_type, elements: [InlineElement]) {
         self.init(type: type, children: elements.map(toNode))
     }
+
+    public convenience init(blocks: [Block]) {
+        self.init(type: CMARK_NODE_DOCUMENT, blocks: blocks)
+    }
 }
 
 extension Node {
@@ -164,14 +168,10 @@ func toNode(block: Block) -> Node {
      node.fenceInfo = language
    case .Html(let text):
      node = Node(type: CMARK_NODE_HTML, literal: text)
-   case let .Header(text, level):
+   case let .Header(text, _):
      node = Node(type: CMARK_NODE_HEADER, elements: text)
    case .HorizontalRule:
      node = Node(type: CMARK_NODE_HRULE)
    }
    return node
-}
-
-public func document(blocks: [Block]) -> Node {
-    return Node(type: CMARK_NODE_DOCUMENT, blocks: blocks)
 }
