@@ -19,6 +19,8 @@ func convert(blocks: [Block]) -> [PlaygroundNode] {
     return blocks.map {
         if let code = codeBlock($0, { $0 == "swift" || $0 == "print-swift" }) {
             return .Code(code)
+        } else if case let .CodeBlock(code, _) = $0 {
+            return .Comment(Block.CodeBlock(text: code, language: nil)) // Remove the language annotations
         } else {
             return .Comment($0)
         }
