@@ -43,14 +43,18 @@ private func printstderr(s: String) {
 }
 
 func evaluateSwift(code: String, expression: String) -> String {
-    let hasPrintlnStatements = !(expression.rangeOfString("println", options: NSStringCompareOptions(), range: nil, locale: nil) == nil)
+    let hasPrintlnStatements = !(expression.rangeOfString("print", options: NSStringCompareOptions(), range: nil, locale: nil) == nil)
     var expressionLines: [String] = expression.lines.filter { $0.characters.count > 0 }
     let contents: String
     if !hasPrintlnStatements {
-        let lastLine = expressionLines.removeLast()
-        let shouldIncludeLet = expressionLines.filter { $0.hasPrefix("let result___ ") }.count == 0
-        let resultIs = shouldIncludeLet ? "let result___ : Any = " : ""
-        contents = "\n".join([code, "", "\n".join(expressionLines), "", "\(resultIs) \(lastLine)", "println(\"\\(result___)\")"])
+        if expressionLines.count == 0 {
+            contents = "\n".join([code, "", "ERROR"])
+        } else {
+            let lastLine = expressionLines.removeLast()
+            let shouldIncludeLet = expressionLines.filter { $0.hasPrefix("let result___ ") }.count == 0
+            let resultIs = shouldIncludeLet ? "let result___ : Any = " : ""
+            contents = "\n".join([code, "", "\n".join(expressionLines), "", "\(resultIs) \(lastLine)", "print(\"\\(result___)\")"])
+        }
     } else {
         contents = "\n".join([code, "", "\n".join(expressionLines)])
     }
