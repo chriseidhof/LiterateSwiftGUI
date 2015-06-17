@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830D0BBB1B310418002E389A /* Weave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D0BBA1B310418002E389A /* Weave.swift */; };
 		837DB96C1B0F6AFF007114EC /* LiterateSwiftFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = 837DB96B1B0F6AFF007114EC /* LiterateSwiftFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		837DB9721B0F6AFF007114EC /* LiterateSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837DB9661B0F6AFF007114EC /* LiterateSwiftFramework.framework */; };
 		837DB9791B0F6AFF007114EC /* LiterateSwiftFrameworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837DB9781B0F6AFF007114EC /* LiterateSwiftFrameworkTests.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		830D0BBA1B310418002E389A /* Weave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weave.swift; sourceTree = "<group>"; };
 		837DB9661B0F6AFF007114EC /* LiterateSwiftFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LiterateSwiftFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		837DB96A1B0F6AFF007114EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		837DB96B1B0F6AFF007114EC /* LiterateSwiftFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiterateSwiftFramework.h; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				837DB96B1B0F6AFF007114EC /* LiterateSwiftFramework.h */,
 				837DB9691B0F6AFF007114EC /* Supporting Files */,
 				837DB9821B0F6B35007114EC /* LiterateSwift.swift */,
+				830D0BBA1B310418002E389A /* Weave.swift */,
 				83D71E2F1B134403000395DE /* Evaluation.swift */,
 			);
 			path = LiterateSwiftFramework;
@@ -221,6 +224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837DB9831B0F6B35007114EC /* LiterateSwift.swift in Sources */,
+				830D0BBB1B310418002E389A /* Weave.swift in Sources */,
 				83D71E301B134403000395DE /* Evaluation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

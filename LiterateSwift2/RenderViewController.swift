@@ -59,15 +59,19 @@ class RenderViewController: NSViewController {
 
     @IBOutlet var webview: WebView!
     
-    func loadNode(elements: [Block]) {
-        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, prependLanguage))
+    func loadNode(fileName: String)(elements: [Block]) {
+        let directory = fileName.stringByDeletingLastPathComponent
+
+        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { prependLanguage($0).flatMap(replaceSnippet(directory)) }))
         webview.mainFrame.loadHTMLString(Node(blocks: elements).html, baseURL: nil)
     }
     
     override func viewDidAppear() {
         if let doc = view.window?.windowController?.document as? MarkdownDocument {
-            doc.callbacks.append(self.loadNode)
-            loadNode(doc.elements)
+            let fileName = doc.fileURL!.path!
+            let load = self.loadNode(fileName)
+            doc.callbacks.append(load)
+            load(elements: doc.elements)
         }
     }
 }
