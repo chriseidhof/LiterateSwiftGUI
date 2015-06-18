@@ -53,8 +53,10 @@ func extractSnippet(filename: String, snippetName: String) -> String? {
 
 func findSnippet(directory: String)(name: String) -> String? {
     let files = findNestedFiles(directory) { $0.pathExtension == "swift" }
-    for swiftFile in files {
-        return extractSnippet(directory.stringByAppendingPathComponent(swiftFile), snippetName: name)
+    for swiftFile in files  {
+        if let snippet = extractSnippet(directory.stringByAppendingPathComponent(swiftFile), snippetName: name) {
+            return snippet
+        }
     }
     return nil
 }

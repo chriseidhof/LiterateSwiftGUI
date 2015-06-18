@@ -48,8 +48,8 @@ func linkURLs(blocks: [Block]) -> [String?] {
 func tableOfContents(blocks: [Block]) -> [Block] {
     let headers = deepCollect(blocks) { (b: Block) -> [Block] in
         guard case let .Header(text, level) = b else { return [] }
-        let prepend = String(Array(count: level, repeatedValue: "#")) + " "
-        return [Block.Paragraph(text: [InlineElement.Text(text: prepend)] + text)]
+        let prepend = "".join(Array(count: level, repeatedValue: "_")) + " "
+        return [Block.Paragraph(text: [InlineElement.Code(text: prepend)] + text)]
     }
     return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
 }
@@ -63,7 +63,9 @@ class RenderViewController: NSViewController {
         let directory = fileName.stringByDeletingLastPathComponent
 
         let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { prependLanguage($0).flatMap(replaceSnippet(directory)) }))
-        webview.mainFrame.loadHTMLString(Node(blocks: elements).html, baseURL: nil)
+        let prelude = "<body style='font-family: \"Akkurat TT\", \"Helvetica\"'>"
+        let html = prelude + (Node(blocks: elements).html ?? "") + "</body>"
+        webview.mainFrame.loadHTMLString(html, baseURL: nil)
     }
     
     override func viewDidAppear() {
