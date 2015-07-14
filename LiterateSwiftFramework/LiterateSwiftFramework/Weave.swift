@@ -9,6 +9,17 @@
 import Foundation
 import CommonMark
 
+extension SequenceType {
+    func takeWhile(f: Generator.Element -> Bool) -> [Generator.Element] {
+        var result: [Generator.Element] = []
+        for element in self {
+            guard f(element) else { break }
+            result.append(element)
+        }
+        return result
+    }
+}
+
 private let nameRegex = try! NSRegularExpression(pattern: "^<<(\\w+)>>$", options: NSRegularExpressionOptions())
 
 func matchName(string: String) -> String? {
@@ -41,10 +52,15 @@ func extractSnippet(filename: String, snippetName: String) -> String? {
     var result: [String]?
     for line in contents.lines {
         if line.hasPrefix("// <</\(snippetName)>>") {
-            return "\n".join(result!)
+            guard let lines = result else { return "" }
+            let snippetIndentation = lines.map { $0.characters.takeWhile { $0 == " " }.count}.reduce(Int.max, combine: min)
+            var index = lines[0].startIndex
+            for _ in 0..<snippetIndentation { index = index.successor() }
+            let indented: [String] = lines.map { $0.substringFromIndex(index) }
+            return "\n".join(indented)
         } else if result != nil {
             result?.append(line)
-        } else if line.hasPrefix("// <<\(snippetName)") {
+        } else if line.hasPrefix("// <<\(snippetName)>>") {
             result = []
         }
     }
