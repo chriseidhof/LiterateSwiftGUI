@@ -4,6 +4,8 @@ A literate swift file is written in CommonMark, written with fenced code blocks.
 
 A file is transformed like this: first, all `swift` code-blocks are assembled into one big swift file. Then, for every print-swift block, a new file is generated, containing the `swift` code blocks and the contents of that print-swift block.
 
+The installation process is a bit broken currently: install libcmark through homebrew, then everything should work (hopefully).
+
 ### Weaving
 
 Additionally, you can include snippets from other swift files in subdirectories (or the same directory).
