@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="8152.3" systemVersion="14E46" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8121.17"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="8121.17"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8152.3"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="8152.3"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -621,7 +621,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LiterateSwift2" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LiterateSwiftGUI" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -653,6 +653,7 @@
                         <tabViewItem identifier="" id="a5f-6g-BDS"/>
                         <tabViewItem id="V4P-fc-www"/>
                         <tabViewItem id="2yL-Gu-oX1"/>
+                        <tabViewItem id="Fia-YD-FeD"/>
                     </tabViewItems>
                     <tabView key="tabView" type="noTabsNoBorder" id="JbK-7B-MXZ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
@@ -664,6 +665,7 @@
                         <segue destination="s7a-Jh-sTi" kind="relationship" relationship="tabItems" id="JgY-gp-YpQ"/>
                         <segue destination="5gI-5U-AMq" kind="relationship" relationship="tabItems" id="jRO-9X-Chz"/>
                         <segue destination="jiC-SC-cTx" kind="relationship" relationship="tabItems" id="Aby-FU-1QE"/>
+                        <segue destination="YTZ-qu-MfM" kind="relationship" relationship="tabItems" id="kHn-wA-9Fm"/>
                     </connections>
                 </tabViewController>
             </objects>
@@ -672,7 +674,7 @@
         <!--Swift-->
         <scene sceneID="RIO-3P-JRb">
             <objects>
-                <viewController title="Swift" id="s7a-Jh-sTi" customClass="SwiftViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Swift" id="s7a-Jh-sTi" customClass="SwiftViewController" customModule="LiterateSwiftGUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="tRQ-o8-YVQ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -680,11 +682,11 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZU-C0-iL1">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" id="OWi-gu-hDM">
-                                    <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="g8Q-Ss-jyC">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="448" height="298"/>
@@ -721,10 +723,62 @@
             </objects>
             <point key="canvasLocation" x="733" y="731"/>
         </scene>
+        <!--Latex-->
+        <scene sceneID="1yM-VI-73f">
+            <objects>
+                <viewController title="Latex" id="YTZ-qu-MfM" customClass="LatexViewController" customModule="LiterateSwiftGUI" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="jUd-Hh-IbO">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0e-uk-ZCg">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                                <clipView key="contentView" id="kQe-8G-bmv">
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="Nfp-Pk-Eti">
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="448" height="298"/>
+                                            <size key="maxSize" width="463" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="bU7-ol-Am4">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="LDr-mP-Lc3">
+                                    <rect key="frame" x="433" y="1" width="16" height="298"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="l0e-uk-ZCg" secondAttribute="trailing" id="03p-mk-o6U"/>
+                            <constraint firstAttribute="bottom" secondItem="l0e-uk-ZCg" secondAttribute="bottom" id="Jco-aT-DBe"/>
+                            <constraint firstItem="l0e-uk-ZCg" firstAttribute="top" secondItem="jUd-Hh-IbO" secondAttribute="top" id="Wia-EN-mUc"/>
+                            <constraint firstItem="l0e-uk-ZCg" firstAttribute="leading" secondItem="jUd-Hh-IbO" secondAttribute="leading" id="gRf-jQ-a3X"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textview" destination="Nfp-Pk-Eti" id="MIj-4o-WSj"/>
+                    </connections>
+                </viewController>
+                <customObject id="701-D2-4x2" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="617" y="319"/>
+        </scene>
         <!--Playground-->
         <scene sceneID="M88-32-cn3">
             <objects>
-                <viewController title="Playground" id="jiC-SC-cTx" customClass="PlaygroundViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Playground" id="jiC-SC-cTx" customClass="PlaygroundViewController" customModule="LiterateSwiftGUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Cqu-PP-xeS">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -732,11 +786,11 @@
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="juY-fa-XdD">
                                 <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                                 <clipView key="contentView" id="DfS-Ew-5Cc">
-                                    <rect key="frame" x="1" y="1" width="223" height="133"/>
+                                    <rect key="frame" x="1" y="1" width="448" height="298"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" id="glY-nh-B5k">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="298"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="448" height="298"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="448" height="298"/>
@@ -776,7 +830,7 @@
         <!--Rendered-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController title="Rendered" id="5gI-5U-AMq" customClass="RenderViewController" customModule="LiterateSwift2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Rendered" id="5gI-5U-AMq" customClass="RenderViewController" customModule="LiterateSwiftGUI" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ERx-hH-rdd">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
