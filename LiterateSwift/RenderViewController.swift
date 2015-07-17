@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 import CommonMark
-import LiterateSwiftFramework
+import LiterateSwift
 
 func prependLanguage(child: Block) -> [Block] {
     guard case let .CodeBlock(_, language) = child where language != nil else { return [child] }
@@ -58,7 +58,7 @@ func tableOfContents(blocks: [Block]) -> [Block] {
 class RenderViewController: NSViewController {
 
     @IBOutlet var webview: WebView!
-    
+
     func loadNode(fileName: String)(elements: [Block]) {
         let directory = fileName.stringByDeletingLastPathComponent
 
@@ -67,7 +67,7 @@ class RenderViewController: NSViewController {
         let html = prelude + (Node(blocks: elements).html ?? "") + "</body>"
         webview.mainFrame.loadHTMLString(html, baseURL: nil)
     }
-    
+
     override func viewDidAppear() {
         if let doc = view.window?.windowController?.document as? MarkdownDocument {
             let fileName = doc.fileURL!.path!
@@ -77,4 +77,3 @@ class RenderViewController: NSViewController {
         }
     }
 }
-

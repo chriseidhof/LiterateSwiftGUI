@@ -7,43 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38AEDE1ECA8E92FA1089C1F8 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79038653B13468E0FDBBF5BC /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		837DB95B1B0F63B3007114EC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837DB95A1B0F63B3007114EC /* WebKit.framework */; };
-		837DB9851B0F6BC1007114EC /* LiterateSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837DB9841B0F6BC1007114EC /* LiterateSwiftFramework.framework */; };
 		838B51741B0F5C7C00137358 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B51731B0F5C7C00137358 /* AppDelegate.swift */; };
 		838B51761B0F5C7C00137358 /* RenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B51751B0F5C7C00137358 /* RenderViewController.swift */; };
 		838B51781B0F5C7C00137358 /* MarkdownDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B51771B0F5C7C00137358 /* MarkdownDocument.swift */; };
 		838B517A1B0F5C7C00137358 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 838B51791B0F5C7C00137358 /* Images.xcassets */; };
 		838B517D1B0F5C7C00137358 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 838B517B1B0F5C7C00137358 /* Main.storyboard */; };
-		838B51891B0F5C7C00137358 /* LiterateSwift2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B51881B0F5C7C00137358 /* LiterateSwift2Tests.swift */; };
-		83A3006E1B0F5E6F00B33E93 /* CommonMark.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A3006D1B0F5E6F00B33E93 /* CommonMark.framework */; };
 		83D71E2E1B132AD5000395DE /* SwiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D71E2D1B132AD5000395DE /* SwiftViewController.swift */; };
 		83EE3D511B2B524800FFB51F /* PlaygroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		838B51831B0F5C7C00137358 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 838B51661B0F5C7C00137358 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 838B516D1B0F5C7C00137358;
-			remoteInfo = LiterateSwift2;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		171DE05A00B0AEE85D9C1990 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		2EDCD4E6C331ECC1BC798717 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		79038653B13468E0FDBBF5BC /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		837DB95A1B0F63B3007114EC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		837DB9841B0F6BC1007114EC /* LiterateSwiftFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LiterateSwiftFramework.framework; path = LiterateSwiftFramework/build/Debug/LiterateSwiftFramework.framework; sourceTree = "<group>"; };
-		838B516E1B0F5C7C00137358 /* LiterateSwift2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiterateSwift2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		838B516E1B0F5C7C00137358 /* LiterateSwiftGUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiterateSwiftGUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		838B51721B0F5C7C00137358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		838B51731B0F5C7C00137358 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		838B51751B0F5C7C00137358 /* RenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderViewController.swift; sourceTree = "<group>"; };
 		838B51771B0F5C7C00137358 /* MarkdownDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownDocument.swift; sourceTree = "<group>"; };
 		838B51791B0F5C7C00137358 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		838B517C1B0F5C7C00137358 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		838B51821B0F5C7C00137358 /* LiterateSwift2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiterateSwift2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		838B51871B0F5C7C00137358 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		838B51881B0F5C7C00137358 /* LiterateSwift2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiterateSwift2Tests.swift; sourceTree = "<group>"; };
-		83A3006D1B0F5E6F00B33E93 /* CommonMark.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CommonMark.framework; path = CommonMark/build/Debug/CommonMark.framework; sourceTree = "<group>"; };
 		83D71E2D1B132AD5000395DE /* SwiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftViewController.swift; sourceTree = "<group>"; };
 		83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaygroundViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,16 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				837DB9851B0F6BC1007114EC /* LiterateSwiftFramework.framework in Frameworks */,
 				837DB95B1B0F63B3007114EC /* WebKit.framework in Frameworks */,
-				83A3006E1B0F5E6F00B33E93 /* CommonMark.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		838B517F1B0F5C7C00137358 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				38AEDE1ECA8E92FA1089C1F8 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,25 +50,23 @@
 		838B51651B0F5C7C00137358 = {
 			isa = PBXGroup;
 			children = (
-				837DB9841B0F6BC1007114EC /* LiterateSwiftFramework.framework */,
 				837DB95A1B0F63B3007114EC /* WebKit.framework */,
-				83A3006D1B0F5E6F00B33E93 /* CommonMark.framework */,
-				838B51701B0F5C7C00137358 /* LiterateSwift2 */,
-				838B51851B0F5C7C00137358 /* LiterateSwift2Tests */,
+				838B51701B0F5C7C00137358 /* LiterateSwift */,
 				838B516F1B0F5C7C00137358 /* Products */,
+				EF8F220F83C6FB0B2B7FA64C /* Pods */,
+				D1B1FE73359F91FAFDFBDCA1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		838B516F1B0F5C7C00137358 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				838B516E1B0F5C7C00137358 /* LiterateSwift2.app */,
-				838B51821B0F5C7C00137358 /* LiterateSwift2Tests.xctest */,
+				838B516E1B0F5C7C00137358 /* LiterateSwiftGUI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		838B51701B0F5C7C00137358 /* LiterateSwift2 */ = {
+		838B51701B0F5C7C00137358 /* LiterateSwift */ = {
 			isa = PBXGroup;
 			children = (
 				838B51731B0F5C7C00137358 /* AppDelegate.swift */,
@@ -102,7 +78,7 @@
 				83D71E2D1B132AD5000395DE /* SwiftViewController.swift */,
 				83EE3D501B2B524800FFB51F /* PlaygroundViewController.swift */,
 			);
-			path = LiterateSwift2;
+			path = LiterateSwift;
 			sourceTree = "<group>";
 		};
 		838B51711B0F5C7C00137358 /* Supporting Files */ = {
@@ -113,60 +89,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		838B51851B0F5C7C00137358 /* LiterateSwift2Tests */ = {
+		D1B1FE73359F91FAFDFBDCA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				838B51881B0F5C7C00137358 /* LiterateSwift2Tests.swift */,
-				838B51861B0F5C7C00137358 /* Supporting Files */,
+				79038653B13468E0FDBBF5BC /* Pods.framework */,
 			);
-			path = LiterateSwift2Tests;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		838B51861B0F5C7C00137358 /* Supporting Files */ = {
+		EF8F220F83C6FB0B2B7FA64C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				838B51871B0F5C7C00137358 /* Info.plist */,
+				171DE05A00B0AEE85D9C1990 /* Pods.debug.xcconfig */,
+				2EDCD4E6C331ECC1BC798717 /* Pods.release.xcconfig */,
 			);
-			name = "Supporting Files";
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		838B516D1B0F5C7C00137358 /* LiterateSwift2 */ = {
+		838B516D1B0F5C7C00137358 /* LiterateSwiftGUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 838B518C1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwift2" */;
+			buildConfigurationList = 838B518C1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwiftGUI" */;
 			buildPhases = (
+				447EF41B9FF59D602F195450 /* Check Pods Manifest.lock */,
 				838B516A1B0F5C7C00137358 /* Sources */,
 				838B516B1B0F5C7C00137358 /* Frameworks */,
 				838B516C1B0F5C7C00137358 /* Resources */,
+				4C4CC8570ECDC7D6330EEC26 /* Embed Pods Frameworks */,
+				57B028FC9D86306C81B8B4F3 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LiterateSwift2;
-			productName = LiterateSwift2;
-			productReference = 838B516E1B0F5C7C00137358 /* LiterateSwift2.app */;
+			name = LiterateSwiftGUI;
+			productName = LiterateSwift;
+			productReference = 838B516E1B0F5C7C00137358 /* LiterateSwiftGUI.app */;
 			productType = "com.apple.product-type.application";
-		};
-		838B51811B0F5C7C00137358 /* LiterateSwift2Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 838B518F1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwift2Tests" */;
-			buildPhases = (
-				838B517E1B0F5C7C00137358 /* Sources */,
-				838B517F1B0F5C7C00137358 /* Frameworks */,
-				838B51801B0F5C7C00137358 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				838B51841B0F5C7C00137358 /* PBXTargetDependency */,
-			);
-			name = LiterateSwift2Tests;
-			productName = LiterateSwift2Tests;
-			productReference = 838B51821B0F5C7C00137358 /* LiterateSwift2Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -181,13 +142,9 @@
 					838B516D1B0F5C7C00137358 = {
 						CreatedOnToolsVersion = 6.3.1;
 					};
-					838B51811B0F5C7C00137358 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = 838B516D1B0F5C7C00137358;
-					};
 				};
 			};
-			buildConfigurationList = 838B51691B0F5C7C00137358 /* Build configuration list for PBXProject "LiterateSwift2" */;
+			buildConfigurationList = 838B51691B0F5C7C00137358 /* Build configuration list for PBXProject "LiterateSwift" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -200,8 +157,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				838B516D1B0F5C7C00137358 /* LiterateSwift2 */,
-				838B51811B0F5C7C00137358 /* LiterateSwift2Tests */,
+				838B516D1B0F5C7C00137358 /* LiterateSwiftGUI */,
 			);
 		};
 /* End PBXProject section */
@@ -216,14 +172,55 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		838B51801B0F5C7C00137358 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		447EF41B9FF59D602F195450 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
-/* End PBXResourcesBuildPhase section */
+		4C4CC8570ECDC7D6330EEC26 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57B028FC9D86306C81B8B4F3 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		838B516A1B0F5C7C00137358 /* Sources */ = {
@@ -238,23 +235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		838B517E1B0F5C7C00137358 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				838B51891B0F5C7C00137358 /* LiterateSwift2Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		838B51841B0F5C7C00137358 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 838B516D1B0F5C7C00137358 /* LiterateSwift2 */;
-			targetProxy = 838B51831B0F5C7C00137358 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		838B517B1B0F5C7C00137358 /* Main.storyboard */ = {
@@ -350,6 +331,7 @@
 		};
 		838B518D1B0F5C7C00137358 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 171DE05A00B0AEE85D9C1990 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -358,14 +340,15 @@
 					"$(PROJECT_DIR)/CommonMark/build/Debug",
 					"$(PROJECT_DIR)/LiterateSwiftFramework/build/Debug",
 				);
-				INFOPLIST_FILE = LiterateSwift2/Info.plist;
+				INFOPLIST_FILE = LiterateSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LiterateSwiftGUI;
 			};
 			name = Debug;
 		};
 		838B518E1B0F5C7C00137358 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EDCD4E6C331ECC1BC798717 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -374,52 +357,16 @@
 					"$(PROJECT_DIR)/CommonMark/build/Debug",
 					"$(PROJECT_DIR)/LiterateSwiftFramework/build/Debug",
 				);
-				INFOPLIST_FILE = LiterateSwift2/Info.plist;
+				INFOPLIST_FILE = LiterateSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		838B51901B0F5C7C00137358 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LiterateSwift2Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiterateSwift2.app/Contents/MacOS/LiterateSwift2";
-			};
-			name = Debug;
-		};
-		838B51911B0F5C7C00137358 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LiterateSwift2Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LiterateSwift2.app/Contents/MacOS/LiterateSwift2";
+				PRODUCT_NAME = LiterateSwiftGUI;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		838B51691B0F5C7C00137358 /* Build configuration list for PBXProject "LiterateSwift2" */ = {
+		838B51691B0F5C7C00137358 /* Build configuration list for PBXProject "LiterateSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				838B518A1B0F5C7C00137358 /* Debug */,
@@ -428,20 +375,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		838B518C1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwift2" */ = {
+		838B518C1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwiftGUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				838B518D1B0F5C7C00137358 /* Debug */,
 				838B518E1B0F5C7C00137358 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		838B518F1B0F5C7C00137358 /* Build configuration list for PBXNativeTarget "LiterateSwift2Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				838B51901B0F5C7C00137358 /* Debug */,
-				838B51911B0F5C7C00137358 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

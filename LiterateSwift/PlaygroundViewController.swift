@@ -8,7 +8,7 @@
 
 import Foundation
 import CommonMark
-import LiterateSwiftFramework
+import LiterateSwift
 
 enum PlaygroundNode {
     case Comment(Block)

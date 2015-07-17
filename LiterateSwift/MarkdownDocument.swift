@@ -10,7 +10,7 @@ import Cocoa
 import CommonMark
 
 class MarkdownDocument: NSDocument {
-    
+
     private var node: Node? {
         didSet {
             let theElements = elements
@@ -21,11 +21,11 @@ class MarkdownDocument: NSDocument {
             }
         }
     }
-    
+
     var elements: [Block] {
         return node?.elements ?? []
     }
-    
+
     var callbacks: [[Block] -> ()] = []
 
     override func makeWindowControllers() {
@@ -34,7 +34,7 @@ class MarkdownDocument: NSDocument {
         let windowController = storyboard.instantiateControllerWithIdentifier("Document Window Controller") as! NSWindowController
         self.addWindowController(windowController)
     }
-    
+
     func reload() {
         node = fileURL?.path.flatMap(parseFile)
     }
@@ -42,10 +42,9 @@ class MarkdownDocument: NSDocument {
     override func readFromURL(url: NSURL, ofType typeName: String) throws {
         reload()
     }
-    
+
     override func presentedItemDidChange() {
         reload()
     }
 
 }
-

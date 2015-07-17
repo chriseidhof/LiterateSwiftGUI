@@ -8,12 +8,12 @@
 
 import Foundation
 import CommonMark
-import LiterateSwiftFramework
+import LiterateSwift
 
 class SwiftViewController: NSViewController {
-    
+
     @IBOutlet var textview: NSTextView?
-    
+
     func loadNode(elements: [Block]) {
         let text = "\n".join(deepCollect(elements, { toArray(codeBlock($0, { $0 == "swift" || $0 == "print-swift" })) }))
         let attributes: [String: AnyObject] = [NSFontAttributeName: NSFont(name: "Monaco", size: 14)!]
