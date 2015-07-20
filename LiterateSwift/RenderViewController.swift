@@ -25,6 +25,13 @@ func stripLink(child: InlineElement) -> [InlineElement] {
     return [child]
 }
 
+func stripSampleImpl(child: Block) -> [Block] {
+    guard case let .CodeBlock(code, language) = child where language == "swift" else { return [child] }
+
+    let cleanCode = code.stringByReplacingOccurrencesOfString("_sample_impl", withString: "")
+    return [.CodeBlock(text: cleanCode, language: language)]
+}
+
 
 func addFootnote() -> InlineElement -> [InlineElement] {
     var counter = 0
@@ -62,7 +69,7 @@ class RenderViewController: NSViewController {
     func loadNode(fileName: String)(elements: [Block]) {
         let directory = fileName.stringByDeletingLastPathComponent
 
-        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { prependLanguage($0).flatMap(replaceSnippet(directory)) }))
+        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { stripSampleImpl($0).flatMap(prependLanguage).flatMap(replaceSnippet(directory)) }))
         let prelude = "<body style='font-family: \"Akkurat TT\", \"Helvetica\"'>"
         let html = prelude + (Node(blocks: elements).html ?? "") + "</body>"
         webview.mainFrame.loadHTMLString(html, baseURL: nil)
