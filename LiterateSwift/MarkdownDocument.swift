@@ -36,7 +36,7 @@ class MarkdownDocument: NSDocument {
     }
 
     func reload() {
-        node = fileURL?.path.flatMap(parseFile)
+        node = fileURL?.path.flatMap { Node(filename: $0) }
     }
 
     override func readFromURL(url: NSURL, ofType typeName: String) throws {

@@ -26,7 +26,7 @@ struct Latex {
         raw = escape(str, mode: .Normal)
     }
     init(literal str: String) {
-        raw = str // escape(str, mode: .Literal)
+        raw = str
     }
     init(urlEscape str: String) {
         raw = escape(str, mode: .URL)
@@ -87,10 +87,13 @@ private let mapping: [Character:String] = [
     ">": "\\textgreater{}",
     "[": "{[}",
     "]": "{]}",
-    "\"": "\\textquotedbl{}",
+//    "\"": "\\textquotedbl{}",
     "'": "\\textquotesingle{}",
     "\u{a0}": "~", // nbsp
     "\u{2026}": "\\ldots{}", // hellip
+    "ọ": "\\d{o}",
+    "ọ̀": "\\d{ó}",
+//    "🇬🇧": "$\\vcenter{\\hbox{\\includegraphics{uk-f}}}$",
 ]
 
 private let mappingInNormal: [Character: String] = [ // Only in normal mode
@@ -139,11 +142,9 @@ func escapeLatex(escape: Escape)(char: Character, next: Character) -> String {
 extension InlineElement: ToLatex {
     var latex: Latex {
         switch self {
-        case let .Code(code):
-            print(code)
-            return "texttt".cmd(code)
+        case let .Code(code): return "texttt".cmd(code)
         case let .Emphasis(children): return "emph".cmd(children)
-        case let .Strong(children): return "strong".cmd(children)
+        case let .Strong(children): return "textbf".cmd(children)
         case .Text(let t): return Latex(escape: t)
         case .SoftBreak: return Latex(raw: " ")
         case .LineBreak: return Latex(raw: "\\\\")
@@ -155,14 +156,16 @@ extension InlineElement: ToLatex {
 }
 
 func header(level: Int) -> String? {
-    switch level {
-    case 1: return "section"
-    case 2: return "subsection"
-    case 3: return "subsubsection"
-    case 4: return "paragraph"
-    case 5: return "subparagraph"
-    default: return nil
-    }
+    let levels = ["chapter",
+     "section",
+     "subsection",
+     "subsubsection",
+     "paragraph",
+     "subparagraph"
+    ]
+    guard level-1 < levels.count else { return nil }
+    return levels[level-1]
+
 }
 
 extension Block: ToLatex {
@@ -170,7 +173,9 @@ extension Block: ToLatex {
         switch self {
         case .BlockQuote(let items):
             return "quote".env(items)
-        case let .CodeBlock(text, language):
+        case let .CodeBlock(text, language) where language == "swift":
+            return "swiftlisting".env(Latex(literal: text))
+        case let .CodeBlock(text, _):
             return "verbatim".env(Latex(literal: text))
         case let .Header(children, level):
             return header(level)!.cmd(children) + Latex(raw: "\n")
