@@ -61,6 +61,14 @@ func tableOfContents(blocks: [Block]) -> [Block] {
     return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
 }
 
+func replaceOrError(s: String)(b: Block) -> [Block] {
+    do {
+        return try replaceSnippet(s)(child: b)
+    } catch {
+        return [Block.CodeBlock(text: "<<Error couldn't find \(s)>>", language: "")]
+    }
+}
+
 
 class RenderViewController: NSViewController {
 
@@ -69,7 +77,9 @@ class RenderViewController: NSViewController {
     func loadNode(fileName: String)(elements: [Block]) {
         let directory = fileName.stringByDeletingLastPathComponent
 
-        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { stripSampleImpl($0).flatMap(prependLanguage).flatMap(replaceSnippet(directory)) }))
+
+
+        let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { stripSampleImpl($0).flatMap(replaceOrError(directory)) }))
         let prelude = "<body style='font-family: \"Akkurat TT\", \"Helvetica\"'>"
         let html = prelude + (Node(blocks: elements).html ?? "") + "</body>"
         webview.mainFrame.loadHTMLString(html, baseURL: nil)
