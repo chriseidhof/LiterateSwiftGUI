@@ -86,8 +86,8 @@ class RenderViewController: NSViewController {
     }
 
     override func viewDidAppear() {
-        if let doc = view.window?.windowController?.document as? MarkdownDocument {
-            let fileName = doc.fileURL!.path!
+        if let doc = view.window?.windowController?.document as? MarkdownDocument, let fileName = doc.fileURL?.path {
+            
             let load = self.loadNode(fileName)
             doc.callbacks.append(load)
             load(elements: doc.elements)
