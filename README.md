@@ -26,6 +26,6 @@ If you surround your code like this:
 
 And put it in a file with the extension .swift, somewhere in the same directory as the markdown file (or a subdirectory), you can then include it in your Markdown file, inside a code block:
 
-    ```
+    ```highlight-swift
     <<MyView>>
     ```
