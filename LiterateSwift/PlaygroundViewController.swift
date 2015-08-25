@@ -35,7 +35,7 @@ extension String {
 
 extension SequenceType where Generator.Element == String {
     func unlines() -> String {
-        return "\n".join(self)
+        return self.joinWithSeparator("\n")
     }
 }
 
@@ -43,11 +43,11 @@ extension SequenceType where Generator.Element == String {
 func render(nodes: [PlaygroundNode]) -> String {
     let strings: [String] = nodes.map {
         switch $0 {
-        case .Comment(let c): return Node(blocks: [c]).commonMark!.lines.map { "//: " + $0 }.unlines()
+        case .Comment(let c): return Node(blocks: [c]).commonMark.lines.map { "//: " + $0 }.unlines()
         case .Code(let c): return c
         }
     }
-    return "\n".join(strings)
+    return strings.unlines()
 }
 
 class PlaygroundViewController: NSViewController {

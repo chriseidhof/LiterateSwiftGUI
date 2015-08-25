@@ -55,7 +55,7 @@ func linkURLs(blocks: [Block]) -> [String?] {
 func tableOfContents(blocks: [Block]) -> [Block] {
     let headers = deepCollect(blocks) { (b: Block) -> [Block] in
         guard case let .Header(text, level) = b else { return [] }
-        let prepend = "".join(Array(count: level, repeatedValue: "_")) + " "
+        let prepend = (Array(count: level, repeatedValue: "_")).joinWithSeparator("") + " "
         return [Block.Paragraph(text: [InlineElement.Code(text: prepend)] + text)]
     }
     return [Block.Paragraph(text: [InlineElement.Emphasis(children: ["Table of contents"])])] + headers + [Block.HorizontalRule]
@@ -75,7 +75,7 @@ class RenderViewController: NSViewController {
     @IBOutlet var webview: WebView!
 
     func loadNode(fileName: String)(elements: [Block]) {
-        let directory = fileName.stringByDeletingLastPathComponent
+        let directory = (fileName as NSString).stringByDeletingLastPathComponent
 
 
 

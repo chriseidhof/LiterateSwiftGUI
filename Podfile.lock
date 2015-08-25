@@ -1,8 +1,8 @@
 PODS:
   - cmark (0.21.0)
-  - CommonMark (0.0.5):
+  - CommonMark (0.0.6):
     - cmark (= 0.21)
-  - LiterateSwift (0.0.4):
+  - LiterateSwift (0.0.11):
     - CommonMark (>= 0.0.3)
 
 DEPENDENCIES:
@@ -11,7 +11,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   cmark: 0868ab0d93af82a0f3f4b69a313b5d2089af51c3
-  CommonMark: c2e32864e06a59f920fd665fa44c771116e70bf6
-  LiterateSwift: 1dec4a8a7066e83fe28300b575595396d72880b1
+  CommonMark: d0f39c0c38ef0d857e6832c616672e96a2947eae
+  LiterateSwift: a430ccf64362718a131bb4ee0646c768343704ca
 
 COCOAPODS: 0.38.2

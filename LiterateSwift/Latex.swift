@@ -43,7 +43,7 @@ func +(x: Latex, y: Latex) -> Latex {
 
 extension Array where Element: ToLatex {
     var joined: Latex {
-        return Latex(raw: "".join(self.map { $0.latex.raw }))
+        return Latex(raw: self.map { $0.latex.raw }.joinWithSeparator(""))
     }
 }
 
@@ -110,7 +110,7 @@ func escape(string: String, mode: Escape) -> String {
     var previous: Character = "x" // Doesn't matter, as long as it's not -
     let f = escapeLatex(mode)
     for char in string.characters {
-        result.extend(f(char: char, next: previous))
+        result += f(char: char, next: previous)
         previous = char
     }
     return result
