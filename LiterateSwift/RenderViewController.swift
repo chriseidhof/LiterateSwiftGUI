@@ -75,13 +75,12 @@ class RenderViewController: NSViewController {
     @IBOutlet var webview: WebView!
 
     func loadNode(fileName: String)(elements: [Block]) {
+        let scrollTop = webview.mainFrame.javaScriptContext.evaluateScript("document.body.scrollTop")
+        let restoreScrollTop = "<script type='text/javascript'>document.body.scrollTop = \(scrollTop)</script>"
         let directory = (fileName as NSString).stringByDeletingLastPathComponent
-
-
-
         let elements = evaluateAndReplacePrintSwift(tableOfContents(elements) + deepApply(elements, { stripSampleImpl($0).flatMap(replaceOrError(directory)) }))
         let prelude = "<body style='font-family: \"Akkurat TT\", \"Helvetica\"'>"
-        let html = prelude + (Node(blocks: elements).html ?? "") + "</body>"
+        let html = prelude + (Node(blocks: elements).html ?? "") + "</body>" + restoreScrollTop
         webview.mainFrame.loadHTMLString(html, baseURL: nil)
     }
 
